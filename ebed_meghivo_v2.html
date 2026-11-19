@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Hálaebéd</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#f6d365,#fda085);margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.card{background:#fff;max-width:820px;width:100%;padding:32px;border-radius:20px;box-shadow:0 12px 30px rgba(0,0,0,.15)}
+.hidden{display:none}.center{text-align:center}
+button{background:#ff7a59;color:#fff;border:none;border-radius:12px;padding:12px 18px;margin:8px;cursor:pointer;font-size:16px}
+button:hover{opacity:.9}
+.option{display:block;width:100%;text-align:left;background:#f4f4f4;color:#222}
+.option.selected{background:#d5f5d1}
+#noBtn{position:relative}
+</style>
+</head>
+<body>
+<div class="card">
+<section id="s1">
+<h1>☕💻 Kávé + Laptop = Rossz Ötlet</h1>
+<p><strong>Kedves Patrik és Donát!</strong></p>
+<p>Mint tudjátok, nemrég sikerült megtanulnom, hogy a laptopok nem különösebben rajonganak a kávéért. ☕💻</p>
+<p>Szerencsére egy profi IT-csapat időben közbelépett, megmentette a gépemet a biztos pusztulástól, így újra nyugodtan termelhetem a GDP-t.</p>
+<p>Hálám jeléül szeretnélek meghívni Titeket egy közös irodai ebédre.</p>
+<p>Válasszátok ki a megfelelő napot és a kedvenc éttermet, a többit pedig bízzátok rám. 😉</p>
+<div class="center"><button onclick="go('s1','s2')">Kezdjük! 🚀</button></div>
+</section>
+
+<section id="s2" class="hidden center">
+<h2>📢 Benne vagy?</h2>
+<p>Egy egyszeri, rendkívüli és teljesen önkéntes irodai ebédre invitállak.</p>
+<button onclick="go('s2','s3')">Naná! 🍔</button>
+<button id="noBtn">Kihagyom, fényevő vagyok 😅</button>
+<p id="msg"></p>
+</section>
+
+<section id="s3" class="hidden">
+<h2>👤 Ki tölti ki?</h2>
+<button class="option">Patrik</button>
+<button class="option">Donát</button>
+<button onclick="go('s3','s4')">Tovább</button>
+</section>
+
+<section id="s4" class="hidden">
+<h2>📅 Melyik nap lenne a legjobb?</h2>
+<button class="option">Hétfő</button>
+<button class="option">Kedd</button>
+<button class="option">Szerda</button>
+<button class="option">Csütörtök</button>
+<button class="option">Péntek</button>
+<button onclick="go('s4','s5')">Tovább</button>
+</section>
+
+<section id="s5" class="hidden">
+<h2>🍔 Mit ennél szívesen?</h2>
+<p>Válaszd ki azt az éttermet, ahonnan a legszívesebben rendelnél:</p>
+<button class="option">KFC Győr Pláza</button>
+<button class="option">Pizza Hut Győr Pláza</button>
+<button class="option">Burger King – Győr</button>
+<button class="option">McDonald's</button>
+<button class="option">Souper Pasta&More</button>
+<button class="option">Westy Ízlelő Ebéd Menü</button>
+<button class="option">Kebap Ház Győr</button>
+<button class="option">Pasa Kebab</button>
+<button class="option">Crunchy by Westy</button>
+<button class="option">Menüzz a Westy-vel!</button>
+<button class="option">Simon’s Burger Győr Árkád</button>
+<button class="option">Pódium Étterem</button>
+<button class="option">Nokedli by Lángos Manufaktúra</button>
+<button class="option">Zing Burger & Co.</button>
+<button class="option">Dobos Házhoz</button>
+<button class="option">Purple Panda Győr</button>
+<button class="option">Peti’s döner Kebap & Sandwich</button>
+<button class="option">100% Lángos Győr</button>
+<button onclick="go('s5','s6')">Szavazat elküldése</button>
+</section>
+
+<section id="s6" class="hidden center">
+<h1>🎉 Köszönöm!</h1>
+<p>A szavazatodat sikeresen rögzítettem.</p>
+<p style="margin-top:20px;">További részleteket személyesen egyeztetjük 🙂</p>
+</section>
+</div>
+<script>
+function go(a,b){document.getElementById(a).classList.add('hidden');document.getElementById(b).classList.remove('hidden');}
+const msgs=['Biztos vagy benne? 😉','Ne már... gondold át még egyszer! 😄','Legalább nézd meg a választékot, mielőtt ilyen elhamarkodott döntést hozol! 🍕','Kezdem azt hinni, hogy csak kíváncsi vagy, mi történik, ha tovább kattintasz. 👀','Mostanra már rájöhettél, hogy a „nem” válasz nem opció. 😎','Hiba 404: „Nem” válasz nem található.','Tovább az étteremválasztáshoz! 🍔'];
+let i=0;const no=document.getElementById('noBtn');
+no.addEventListener('click',()=>{document.getElementById('msg').textContent=msgs[Math.min(i,6)];i++;if(i>=7)go('s2','s3');});
+no.addEventListener('mouseover',()=>{no.style.left=(Math.random()*180-90)+'px';no.style.top=(Math.random()*60-30)+'px';});
+document.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>{b.parentElement.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');}));
+</script>
+</body>
+</html>
